@@ -69,38 +69,31 @@ document.getElementsByTagName("body")[0].appendChild(statcounterscript);
 
     }
 
-    function next_question(mult) {
-        govt += mult*questions[qn].effect.govt
-        cmnt += mult*questions[qn].effect.cmnt
-        jstc += mult*questions[qn].effect.jstc
-        scty += mult*questions[qn].effect.scty
-        dipl += mult*questions[qn].effect.dipl
-        intr += mult*questions[qn].effect.intr
-        qn++;
-        prev_answer = mult;
-        if (qn < questions.length) {
-            init_question();
-        } else {
-            results();
-        }
-    }
-    function prev_question() {
-        if (prev_answer == null) {
-            return;
-        }
-        qn--;
-        govt -= prev_answer * questions[qn].effect.govt;
-        cmnt -= prev_answer * questions[qn].effect.cmnt;
-        jstc -= prev_answer * questions[qn].effect.jstc;
-        scty -= prev_answer * questions[qn].effect.scty;
-        dipl -= prev_answer * questions[qn].effect.dipl;
-        intr -= prev_answer * questions[qn].effect.intr;
-        prev_answer = null;
-        init_question();
+function next_question(mult) {
+	questions[qn].answer = mult
+	qn++;
+	
+	if (qn < questions.length)
+	{
+		init_question();
+	}
+	else
+	{
+		results();
+	}
+}
+function prev_question()
+{
+	if (qn == 0)
+	{
+		return;
+	}
+	qn--;
+	init_question();
 
-    }
+}
     function calc_score(score,max) {
-        return (100*(max+score)/(2*max)).toFixed(1)
+        return (100*(score)/(max)).toFixed(0)
     }
     function results() {
         location.href = `results.html`
@@ -111,6 +104,45 @@ document.getElementsByTagName("body")[0].appendChild(statcounterscript);
             + `&d=${calc_score(dipl,max_dipl)}`
             + `&i=${calc_score(intr,max_intr)}`
     }
+        
+function simulate()
+{
+	while(qn < questions.length)
+	{
+		prop = 0.0;
+		propCounter = 0;
+		for(var j=0; j<questions[qn].valuesYes.length; j++)
+		{
+			a = questions[qn].valuesYes[j];
+			if(a.axis in rand_per_axis)
+			{
+				prop += rand_per_axis[a.axis];
+				propCounter++;
+			}
+		}
+		for(var j=0; j<questions[qn].valuesNo.length; j++)
+		{
+			a = questions[qn].valuesNo[j];
+			if(a.axis in rand_per_axis)
+			{
+				prop += 1.0 - rand_per_axis[a.axis];
+				propCounter++;
+			}
+		}
+		
+		if(propCounter > 0)
+			prop /= propCounter;
+		else
+			prop = 0.2;
+		
+		if(Math.random() < 0.1)
+			next_question(0);
+		else if(Math.random() < prop)
+			next_question(1);
+		else
+			next_question(-1);
+	}
+}
 </script>
 </body>
 </html>
