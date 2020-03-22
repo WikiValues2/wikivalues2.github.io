@@ -1,0 +1,260 @@
+<html>
+<head>
+<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:400,700" rel="stylesheet">
+<link href='style.css' rel='stylesheet' type='text/css'>
+<title>WikiValues2 Results</title>
+<link rel="icon" type="x-icon" href="icon.png">
+<link rel="shortcut icon" type="x-icon" href="icon.png">
+<meta charset="utf-8">
+</head>
+<script type="application/javascript">
+</script>
+
+<body>
+<h1>WikiValues2</h1>
+<hr>
+
+<h1>Результаты</h1>
+
+<h2>Ось правления и власти: <span class="weight-300" id="government-label"></span></h2>
+<div class="axis">
+    <img id="img-democracy" src="value_images/democracy.png" height="128pt"/>
+    <div class="bar democracy" id="bar-democracy"><div class="text-wrapper" id="democracy"></div></div>
+    <div class="bar authoritarianism" id="bar-authoritarianism"><div class="text-wrapper" id="authoritarianism"></div></div>
+    <img id="img-authoritarianism" src="value_images/authoritarianism.png" height="128pt"/>
+</div>
+<h2>Ось сообщества: <span class="weight-300" id="community-label"></span></h2>
+<div class="axis">
+    <img id="img-collectivism" src="value_images/collectivism.png" height="128pt"/>
+    <div class="bar collectivism" id="bar-collectivism"><div class="text-wrapper" id="collectivism"></div></div>
+    <div class="bar individualism" id="bar-individualism"><div class="text-wrapper" id="individualism"></div></div>
+    <img id="img-individualism" src="value_images/individualism.png" height="128pt"/>
+</div>
+<h2>Ось правосудия: <span class="weight-300" id="justice-label"></span></h2>
+<div class="axis">
+    <img id="img-rehabilitation" src="value_images/rehabilitation.png" height="128pt"/>
+    <div class="bar rehabilitation" id="bar-rehabilitation"><div class="text-wrapper" id="rehabilitation"></div></div>
+    <div class="bar punitive" id="bar-punitive"><div class="text-wrapper" id="punitive"></div></div>
+    <img id="img-punitive" src="value_images/punitive.png" height="128pt"/>
+</div>
+<h2>Социальная Ось: <span class="weight-300" id="society-label"></span></h2>
+<div class="axis">
+    <img id="img-progress" src="value_images/progress.png" height="128pt"/>
+    <div class="bar progress" id="bar-progress"><div class="text-wrapper" id="progress"></div></div>
+    <div class="bar conservatism" id="bar-conservatism"><div class="text-wrapper" id="conservatism"></div></div>
+    <img id="img-conservatism" src="value_images/conservatism.png" height="128pt"/>
+</div>
+<h2>Дипломатическая Ось: <span class="weight-300" id="diplomatic-label"></span></h2>
+<div class="axis">
+    <img id="img-globalism" src="value_images/globalism.png" height="128pt"/>
+    <div class="bar globalism" id="bar-globalism"><div class="text-wrapper" id="globalism"></div></div>
+    <div class="bar isolationism" id="bar-isolationism"><div class="text-wrapper" id="isolationism"></div></div>
+    <img id="img-isolationism" src="value_images/isolationism.png" height="128pt"/>
+</div>
+<h2>Ось интеграции: <span class="weight-300" id="integration-label"></span></h2>
+<div class="axis">
+    <img id="img-unionism" src="value_images/unionism.png" height="128pt"/>
+    <div class="bar unionism" id="bar-unionism"><div class="text-wrapper" id="unionism"></div></div>
+    <div class="bar autonomism" id="bar-autonomism"><div class="text-wrapper" id="autonomism"></div></div>
+    <img id="img-autonomism" src="value_images/autonomism.png" height="128pt"/>
+</div>
+<p>Вы можете отправить эти результаты, скопировав и вставив URL в верхней части страницы или используя изображение ниже.</p>
+<hr/>
+<canvas id="banner" width=800 height=890 style="font-family:Montserrat"></canvas>
+<button class="button" onclick="location.href='index.html';" style="background-color: #2196f3;">Назад</button> <br>
+<!-- Privacy respecting Statcounter code for WikiValues2 http://wikivalues2.github.io -->
+<script type="text/javascript">
+var sc_project=12079783; 
+var sc_invisible=1; 
+var sc_security="fa5443fa"; 
+var sc_https=1;
+if(navigator.doNotTrack != 1) {
+var statcounterscript=document.createElement('script');
+statcounterscript.setAttribute("type","text/javascript");
+statcounterscript.setAttribute("src", "https://www.statcounter.com/counter/counter.js");
+document.getElementsByTagName("body")[0].appendChild(statcounterscript);
+}
+</script>
+<!-- End of Statcounter Code -->
+<!-- JavaScript for the test itself -->
+<script>
+    function getQueryVariable(variable)
+    {
+           var query = window.location.search.substring(1)
+           var vars = query.split("&")
+           for (var i=0;i<vars.length;i++) {
+                   var pair = vars[i].split("=")
+                   if(pair[0] == variable) {return pair[1]}
+           }
+           return(NaN);
+    }
+
+    function setBarValue(name, value) {
+        innerel = document.getElementById(name)
+        outerel = document.getElementById("bar-" + name)
+        outerel.style.width = (value + "%")
+        innerel.innerHTML = (value + "%")
+        if (innerel.offsetWidth + 20 > outerel.offsetWidth) {
+            innerel.style.visibility = "hidden"
+        }
+    }
+
+    govtArray = ["Ультрадемократия/Анархизм", "Демократия", "Умеренная демократия", "Нейтрально", "Этатизм", "Авторитаризм", "Тоталитаризм"]
+    cmntArray = ["Ультраколлективизм", "Коллективизм", "Умеренный коллективизм", "Нейтрально", "Умеренный индивидуализм", "Индивидуализм", "Ультра-индивидуализм"]
+    jstcArray = ["Крайне реабилитационный", "Реабилитационный", "Умеренно реабилитационный", "Нейтрально", "Умеренно карательный", "Карательный", "Крайне карательный"]
+    sctyArray = ["Революционизм", "Прогрессивизм", "Умеренный прогрессивизм", "Нейтрально", "Умеренный консерватизм", "Консерватизм", "Реакционизм"]
+    diplArray = ["Ультраглобализм", "Глобализм", "Умеренный глобализм", "Нейтрально", "Умеренный изоляционизм", "Изоляционизм", "Крайний изоляционизм"]
+    intrArray = ["Ультра-юнионизм", "Юнионизм", "Умеренный юнионизм", "Нейтрально", "Умеренный автономизм", "Автономизм", "Крайний автономизм"]
+
+    function setLabel(val,ary) {
+        if (val > 100) { return "" } else
+        if (val > 90) { return ary[0] } else
+        if (val > 75) { return ary[1] } else
+        if (val > 60) { return ary[2] } else
+        if (val >= 40) { return ary[3] } else
+        if (val >= 25) { return ary[4] } else
+        if (val >= 10) { return ary[5] } else
+        if (val >= 0) { return ary[6] } else
+        	{return ""}
+    }
+
+    democracy        = getQueryVariable("g")
+    collectivism     = getQueryVariable("c")
+    rehabilitation   = getQueryVariable("j")
+    progress         = getQueryVariable("s")
+    globalism        = getQueryVariable("d")
+    unionism         = getQueryVariable("i")
+    authoritarianism = (100 - democracy     ).toFixed(1)
+    individualism    = (100 - collectivism  ).toFixed(1)
+    punitive         = (100 - rehabilitation).toFixed(1)
+    conservatism     = (100 - progress      ).toFixed(1)
+    isolationism     = (100 - globalism     ).toFixed(1)
+    autonomism       = (100 - unionism      ).toFixed(1)
+
+    setBarValue("democracy", democracy)
+    setBarValue("authoritarianism", authoritarianism)
+    setBarValue("collectivism", collectivism)
+    setBarValue("individualism", individualism)
+    setBarValue("rehabilitation", rehabilitation)
+    setBarValue("punitive", punitive)
+    setBarValue("progress", progress)
+    setBarValue("conservatism", conservatism)
+    setBarValue("globalism", globalism)
+    setBarValue("isolationism", isolationism)
+    setBarValue("unionism", unionism)
+    setBarValue("autonomism", autonomism)
+
+    document.getElementById("government-label").innerHTML = setLabel(democracy, govtArray)
+    document.getElementById("community-label").innerHTML = setLabel(collectivism, cmntArray)
+    document.getElementById("justice-label").innerHTML = setLabel(rehabilitation, jstcArray)
+    document.getElementById("society-label").innerHTML = setLabel(progress, sctyArray)
+    document.getElementById("diplomatic-label").innerHTML = setLabel(globalism, diplArray)
+    document.getElementById("integration-label").innerHTML = setLabel(unionism, intrArray)
+
+    function createImage(src, x, y, w, h) {
+        img = new Image ()
+        img.src = src
+        img.onLoad = function() {
+            ctx.drawImage(img, x, y, w, h)
+        }
+    }
+
+    window.onload = function() {
+        var c = document.getElementById("banner")
+        var ctx = c.getContext("2d")
+        ctx.fillStyle = "#EEEEEE"
+        ctx.fillRect(0,0,800,890)
+
+        img = document.getElementById("img-democracy")
+        ctx.drawImage(img, 20, 170, 100, 100);
+        img = document.getElementById("img-authoritarianism")
+        ctx.drawImage(img, 680, 170, 100, 100)
+        img = document.getElementById("img-collectivism")
+        ctx.drawImage(img, 20, 290, 100, 100)
+        img = document.getElementById("img-individualism")
+        ctx.drawImage(img, 680, 290, 100, 100)
+        img = document.getElementById("img-rehabilitation")
+        ctx.drawImage(img, 20, 410, 100, 100)
+        img = document.getElementById("img-punitive")
+        ctx.drawImage(img, 680, 410, 100, 100)
+        img = document.getElementById("img-progress")
+        ctx.drawImage(img, 20, 530, 100, 100)
+        img = document.getElementById("img-conservatism")
+        ctx.drawImage(img, 680, 530, 100, 100)
+	img = document.getElementById("img-globalism")
+        ctx.drawImage(img, 20, 650, 100, 100)
+        img = document.getElementById("img-isolationism")
+        ctx.drawImage(img, 680, 650, 100, 100)
+        img = document.getElementById("img-unionism")
+        ctx.drawImage(img, 20, 770, 100, 100)
+        img = document.getElementById("img-autonomism")
+        ctx.drawImage(img, 680, 770, 100, 100)
+
+        ctx.fillStyle="#222222"
+        ctx.fillRect(120, 180, 560, 80)
+        ctx.fillRect(120, 300, 560, 80)
+        ctx.fillRect(120, 420, 560, 80)
+        ctx.fillRect(120, 540, 560, 80)
+	ctx.fillRect(120, 660, 560, 80)
+	ctx.fillRect(120, 780, 560, 80)
+        ctx.fillStyle="#BC1D1D"
+        ctx.fillRect(120, 184, 5.6*democracy-2, 72)
+        ctx.fillStyle="#008A7B"
+        ctx.fillRect(682-5.6*authoritarianism, 184, 5.6*authoritarianism-2, 72)
+        ctx.fillStyle="#C7442A"
+        ctx.fillRect(120, 304, 5.6*collectivism-2, 72)
+        ctx.fillStyle="#D0A800"
+        ctx.fillRect(682-5.6*individualism, 304, 5.6*individualism-2, 72)
+        ctx.fillStyle="#00A33D"
+        ctx.fillRect(120, 424, 5.6*rehabilitation-2, 72)
+        ctx.fillStyle="#784D1B"
+        ctx.fillRect(682-5.6*punitive, 424, 5.6*punitive-2, 72)
+        ctx.fillStyle="#8F19A6"
+        ctx.fillRect(120, 544, 5.6*progress-2, 72)
+        ctx.fillStyle="#076392"
+        ctx.fillRect(682-5.6*conservatism, 544, 5.6*conservatism-2, 72)
+	ctx.fillStyle="#00ACD9"
+        ctx.fillRect(120, 664, 5.6*globalism-2, 72)
+        ctx.fillStyle="#D88000"
+        ctx.fillRect(682-5.6*isolationism, 664, 5.6*isolationism-2, 72)
+        ctx.fillStyle="#7B902E"
+        ctx.fillRect(120, 784, 5.6*unionism-2, 72)
+        ctx.fillStyle="#923039"
+        ctx.fillRect(682-5.6*autonomism, 784, 5.6*autonomism-2, 72)
+        ctx.fillStyle="#222222"
+        ctx.font="700 80px Montserrat"
+        ctx.textAlign="left"
+        ctx.fillText("WikiValues2", 20, 90)
+        ctx.font="40px Montserrat"
+        ctx.textAlign="right"
+
+        ctx.textAlign="left"
+        if (democracy        > 30) {ctx.fillText(democracy + "%", 130, 237.5)}
+        if (collectivism     > 30) {ctx.fillText(collectivism + "%", 130, 357.5)}
+        if (rehabilitation   > 30) {ctx.fillText(rehabilitation + "%", 130, 477.5)}
+        if (progress         > 30) {ctx.fillText(progress + "%", 130, 597.5)}
+	if (globalism        > 30) {ctx.fillText(globalism + "%", 130, 717.5)}
+        if (unionism         > 30) {ctx.fillText(unionism + "%", 130, 837.5)}
+        ctx.textAlign="right"
+        if (authoritarianism > 30) {ctx.fillText(authoritarianism + "%", 670, 237.5)}
+        if (individualism    > 30) {ctx.fillText(individualism + "%", 670, 357.5)}
+        if (punitive         > 30) {ctx.fillText(punitive + "%", 670, 477.5)}
+        if (conservatism     > 30) {ctx.fillText(conservatism + "%", 670, 597.5)}
+	if (isolationism     > 30) {ctx.fillText(isolationism + "%", 670, 717.5)}
+	if (autonomism       > 30) {ctx.fillText(autonomism + "%", 670, 837.5)}
+
+        ctx.font="300 24px Montserrat"
+        ctx.fillText("WikiValues2.github.io", 780, 60)
+		//ctx.fillText(version, 780, 120)
+        ctx.font="400 24px Montserrat"
+        ctx.textAlign="center"
+        ctx.fillText("" + document.getElementById("government-label").innerHTML, 400, 175)
+        ctx.fillText("" + document.getElementById("community-label").innerHTML, 400, 295)
+        ctx.fillText("" + document.getElementById("justice-label").innerHTML, 400, 415)
+        ctx.fillText("" + document.getElementById("society-label").innerHTML, 400, 535)
+	ctx.fillText("" + document.getElementById("diplomatic-label").innerHTML, 400, 655)
+        ctx.fillText("" + document.getElementById("integration-label").innerHTML, 400, 775)
+    }
+    </script>
+</body>
+</html>
