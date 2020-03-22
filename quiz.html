@@ -7,9 +7,6 @@
 <link rel="shortcut icon" type="x-icon" href="icon.png">
 <meta charset="utf-8">
 </head>
-<body>
-<script type="application/javascript"
-        src="questions.js">
 </script>
 <h1>WikiValues2</h1>
 <hr>
@@ -24,50 +21,1757 @@
 <button class="small_button" onclick="simulate()">Случайный результат</button>   
 <button class="small_button" onclick="location.href='index.html';" style="background-color: #2196f3;">На главную</button><br>
 
-<!-- Privacy respecting Statcounter code for WikiValues2 http://wikivalues2.github.io -->
-<script type="text/javascript">
-var sc_project=12079783; 
-var sc_invisible=1; 
-var sc_security="fa5443fa"; 
-var sc_https=1;
-if(navigator.doNotTrack != 1) {
-var statcounterscript=document.createElement('script');
-statcounterscript.setAttribute("type","text/javascript");
-statcounterscript.setAttribute("src", "https://www.statcounter.com/counter/counter.js");
-document.getElementsByTagName("body")[0].appendChild(statcounterscript);
-}
-</script>
-<!-- End of Statcounter Code -->
-
-<!-- JavaScript for the test itself -->
 <script>
-    var max_govt, max_cmnt, max_jstc, max_scty, max_intr, max_dipl; // Max possible scores
-    max_govt = max_cmnt = max_jstc = max_scty = max_dipl = max_intr = 0;
-    var govt, cmnt, jstc, scty, dipl, intr; // User's scores
-    govt = cmnt = jstc = scty = dipl = intr = 0;
-    var qn = 0; // Question number
-    var prev_answer = null;
-    init_question();
-    for (var i = 0; i < questions.length; i++) {
-        max_govt += Math.abs(questions[i].effect.govt)
-        max_cmnt += Math.abs(questions[i].effect.cmnt)
-        max_jstc += Math.abs(questions[i].effect.jstc)
-        max_scty += Math.abs(questions[i].effect.scty)
-        max_dipl += Math.abs(questions[i].effect.dipl)
-        max_intr += Math.abs(questions[i].effect.intr)
-    }
-    function init_question() {
-        document.getElementById("question-text").innerHTML = questions[qn].question;
-        document.getElementById("question-number").innerHTML = "Вопрос " + (qn + 1) + " из " + (questions.length);
-        if (prev_answer == null) {
-            document.getElementById("back_button").style.display = 'none';
-            document.getElementById("back_button_off").style.display = 'block';
-        } else {
-            document.getElementById("back_button").style.display = 'block';
-            document.getElementById("back_button_off").style.display = 'none';
-        }
+questions = [
+	/* Ось правления и власти ************************************************ */
+	{
+		question: "Начинать новый википроект лучше всего с создания большого количества правил или расписывания политики поведения на вики.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "a1",
+				value: 5
+			},
+			{
+				axis: "c1",
+				value: 5
+			}
+		],
+		valuesNo: [
+			{
+				axis: "a0",
+				value: 5
+			},
+			{
+				axis: "c0",
+				value: 5
+			}
+		]
+	},
+	{
+		question: "Те, кто больше трудятся, кто вносят больше вклада в развитие вики, должны получать больше возможностей (в т. ч., например, особые привилегии).",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "a1",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "a0",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Чем больше прав и возможностей у каждого участника, тем общество справедливей и честней.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "a0",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "a1",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Любая власть должна быть оспоримой.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "a0",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "a1",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Любая власть должна быть заменяемой: никакие бюрократы, администраторы и модераторы не должны править на википроекте вечно.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "a0",
+				value: 5
+			}
+		],
+		valuesNo: [
+			{
+				axis: "a1",
+				value: 5
+			}
+		]
+	},
+	{
+		question: "На википроектах должны открыто проводиться голосования; каждый обычный участник должен иметь право голоса и право свободно участвовать в таком голосовании.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "a0",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "a1",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "На википроектах должны открыто проводиться обсуждения и коллективно решаться вопросы с обычными участниками.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "a0",
+				value: 10
+			},
+			{
+				axis: "b0",
+				value: 5
+			}
+		],
+		valuesNo: [
+			{
+				axis: "a1",
+				value: 10
+			},
+			{
+				axis: "b1",
+				value: 5
+			}
+		]
+	},
+	{
+		question: "Чем больше участников будет опрошено, тем больше шансов на достижение наилучшего решения.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "a0",
+				value: 5
+			}
+		],
+		valuesNo: [
+			{
+				axis: "a1",
+				value: 5
+			}
+		]
+	},
+	{
+		question: "Администрация, вне зависимости от результатов голосования, может иметь право принимать иное решение и поступать по-своему.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "a1",
+				value: 5
+			}
+		],
+		valuesNo: [
+			{
+				axis: "a0",
+				value: 5
+			}
+		]
+	},
+	{
+		question: "Важно, чтобы администрация придерживалось мнения большинства, даже если оно спорное/сомнительное/неверное.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "a0",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "a1",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Никто, кроме меня, не может адекватно представлять свою точку зрения. Моё слово — закон.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "a1",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "a0",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Все участники википроекта должны иметь право свободно высказывать своё мнение и иметь неограниченную свободу слова.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "a0",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "a1",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Я поддерживаю иерархическое устройство вики, как естественное и неизбежное. Отсутствие процесса формирования элит (высшего класса) — признак неразвитости или застойности общества.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "a1",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "a0",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Превосходство одних участников и неполноценность других являются врождённой и объективной реальностью.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "a1",
+				value: 5
+			}
+		],
+		valuesNo: [
+			{
+				axis: "a0",
+				value: 5
+			}
+		]
+	},
+	{
+		question: "Народ (в виде обычных участников) в целом не может управлять целой вики. Эту функцию должны брать на себя определённые выделяющиеся участники или элита общества.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "a1",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "a0",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Во избежание проблемы оторванности от народа, каждому администратору нужно быть таким же открытым и общительным перед обычными участниками, как и перед другими администраторами/модераторами.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "a0",
+				value: 5
+			}
+		],
+		valuesNo: [
+			{
+				axis: "a1",
+				value: 5
+			}
+		]
+	},
+	{
+		question: "Такие статусы, как «бюрократ», «администратор», «модератор» не делают участника выше и главнее остальных. Это лишь инструменты, дающие доступ к определённым функциям википроекта.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "a0",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "a1",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Активное наблюдение за всеми действиями, происходящими на проекте со стороны администрации, необходимо на вики.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "a1",
+				value: 5
+			}
+		],
+		valuesNo: [
+			{
+				axis: "a0",
+				value: 5
+			}
+		]
+	},
+	{
+		question: "Администрация не должна регулировать отношения между участниками, вмешиватьcя в их личные разборки и споры. Мирное разрешение конфликтов — это обязанность всех участников.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "a0",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "a1",
+				value: 10
+			}
+		]
+	},
+        {
+		question: "Администрация, по сравнению с обычными участниками, может иметь исключения касательно правил вики (т.е. те правила, которые обязаны соблюдать все обычные участники, администрация имеет право не соблюдать в определённых ситуациях).",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "a1",
+				value: 5
+			}
+		],
+		valuesNo: [
+			{
+				axis: "a0",
+				value: 5
+			}
+		]
+	},
+	{
+		question: "Большей свободы для участников можно достичь сокращением некоторых функций администрации и/или сделав правила википроекта менее жёсткими и строгими.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "a0",
+				value: 10
+			},
+			{
+				axis: "c0",
+				value: 5
+			}
+		],
+		valuesNo: [
+			{
+				axis: "a1",
+				value: 10
+			},
+			{
+				axis: "c1",
+				value: 5
+			}
+		]
+	},
+	{
+		question: "Чем руководство на вики более опытное и строгое, тем эффективней, лучше и быстрее будет проводиться работа.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "a1",
+				value: 5
+			},
+			{
+				axis: "b0",
+				value: 5
+			}
+		],
+		valuesNo: [
+			{
+				axis: "a0",
+				value: 5
+			},
+			{
+				axis: "b1",
+				value: 5
+			}
+		]
+	},
+	{
+		question: "Сильная власть не может исправить недостатки участников.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "a0",
+				value: 5
+			}
+		],
+		valuesNo: [
+			{
+				axis: "a1",
+				value: 5
+			}
+		]
+	},
+	{
+		question: "Самоуправление — хорошая форма организации работы для всех участников википроекта, в отличии от непосредственного и принудительного контроля за участниками со стороны вышестоящих органов власти.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "a0",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "a1",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Большинство участников принимает неверные решения в отношении тех или иных вопросов, поэтому необходимо направить их в определенную сторону, заставить их следовать определённой идеологии, принципам, правилам.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "a1",
+				value: 10
+			},
+			{
+				axis: "b0",
+				value: 5
+			}
+		],
+		valuesNo: [
+			{
+				axis: "a0",
+				value: 10
+			},
+			{
+				axis: "b1",
+				value: 5
+			}
+		]
+	},
+	{
+		question: "Независимо от идеологических взглядов, необходимо быть на стороне администрации своей вики.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "a1",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "a0",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Администрация имеет право проводить репрессии и блокировать нежелательных участников, которые высказывают противоположную точку зрения или критикуют действия самой администрации.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "a1",
+				value: 10
+			},
+			{
+				axis: "c1",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "a0",
+				value: 10
+			},
+			{
+				axis: "c0",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Цензура, устанавливаемая администрацией, необходима для обеспечения внутренней и внешней безопасности википроекта, его стабильности, а также для ограничения распространения нежелательных сведений.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "a1",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "a0",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Нет ничего плохого в формировании культа личности определённого администратора.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "a1",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "a0",
+				value: 10
+			}
+		]
+	},
+    /* Ось сообщества ************************************************* */
+	{
+		question: "Важно ставить общественные интересы над личными.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "b0",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "b1",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Нельзя пренебрегать желаниями отдельно взятых участников, даже если их предложения могут отвлечь от основных целей развития википроекта.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "b1",
+				value: 5
+			}
+		],
+		valuesNo: [
+			{
+				axis: "b0",
+				value: 5
+			}
+		]
+	},
+	{
+		question: "Все участники абсолютно разные, так что нельзя рассматривать их как единую массу, как единое сообщество.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "b1",
+				value: 5
+			}
+		],
+		valuesNo: [
+			{
+				axis: "b0",
+				value: 5
+			}
+		]
+	},
+	{
+		question: "Развитие вики-общества вполне возможно без существования единых для всех целей.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "b1",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "b0",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Спонтанные действия участников более эффективны, чем тщательно спланированные.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "b1",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "b0",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Наличие конкуренции между участниками на википроекте (например, в конкурсах) является основным стимулом саморазвития участников и поддержания активности.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "b1",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "b0",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Каждый участник должен иметь право на свободные решения от вмешательств администрации и поступать так, как считает нужным он сам.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "a0",
+				value: 5
+			},
+			{
+				axis: "b1",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "a1",
+				value: 5
+			},
+			{
+				axis: "b0",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Важно, чтобы у участников википроекта были общие интересы.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "b0",
+				value: 5
+			}
+		],
+		valuesNo: [
+			{
+				axis: "b1",
+				value: 5
+			}
+		]
+	},
+	{
+		question: "Работая вместе, участники могут принести википроекту больше пользы, чем если бы работали поодиночке.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "b0",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "b1",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Собирая участников в единое сообщество, гораздо больше шанс сплотить всех, cдружиться, найти общие интересы, чем если бы все занимались работой поодиночке и независимо друг от друга.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "b0",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "b1",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "В первую очередь надо уделять внимание целому вики-сообществу, а не только каким-то отдельно взятым личностям.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "b0",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "b1",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Работая вместе с остальными, точно так же, как и все, участники рискуют потерять свою индивидуальность в толпе.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "b1",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "b0",
+				value: 10
+			}
+		]
+	},
+    /* Ось правосудия *************************************************** */
+	{
+		question: "Не стоит чрезмерно завышать сроки банов участников (например, выдавать баны сроком на несколько месяцев, полгода или больше).",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "c0",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "c1",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Не стоит упускать из виду даже самые мелкие нарушения правил участниками (например, одно матерное слово в большом комментарии). Даже такие нарушения стоят серьёзного рассмотрения, ровно как и более серьёзные нарушения.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "a1",
+				value: 5
+			},
+			{
+				axis: "c1",
+				value: 5
+			}
+		],
+		valuesNo: [
+			{
+				axis: "a0",
+				value: 5
+			},
+			{
+				axis: "c0",
+				value: 5
+			}
+		]
+	},
+	{
+		question: "Не лишним станет создание на вики списка нарушителей, в который будут заноситься любые участники, когда-либо нарушавшие правила на википроекте, включая даже самые незначительные нарушения.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "a1",
+				value: 5
+			},
+			{
+				axis: "c1",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "a0",
+				value: 5
+			},
+			{
+				axis: "c0",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Мы должны давать участникам-нарушителям возможность извиняться за свои проступки и исправляться.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "c0",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "c1",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Если участник получил бан, администрация обязана поговорить с ним, обсудить произошедшее, попытаться заставить нарушителя понять, почему он не должен делать то, что сделал, и почему он был наказан.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "c0",
+				value: 5
+			}
+		],
+		valuesNo: [
+			{
+				axis: "c1",
+				value: 5
+			}
+		]
+	},
+	{
+		question: "С теми, кто нарушал правила неоднократно, бесполезно пытаться найти общий язык.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "c1",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "c0",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "За участниками-рецедивистами необходимо вести более строгий надзор и контроль.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "c1",
+				value: 5
+			}
+		],
+		valuesNo: [
+			{
+				axis: "c0",
+				value: 5
+			}
+		]
+	},
+	{
+		question: "Важно делать нарушителей своеобразными «примерами», которым не стоит следовать.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "c1",
+				value: 5
+			}
+		],
+		valuesNo: [
+			{
+				axis: "c0",
+				value: 5
+			}
+		]
+	},
+	{
+		question: "Участнику, по поведению которого видно, что он потенциально опасен и может натворить много вреда для общества, лучше превентивно выдать блокировку, чем допускать риск совершения им преступлений.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "c1",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "c0",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "К нарушителю-рецедивисту вполне оправдано негативное отношение со стороны остальных участников, и неприязнь в обществе.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "c1",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "c0",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Насколько бы серьёзное нарушение не совершил участник в первый раз, даже в таком случае, недопустимо ему сразу выдавать перманентный бан.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "c0",
+				value: 5
+			}
+		],
+		valuesNo: [
+			{
+				axis: "c1",
+				value: 5
+			}
+		]
+	},
+	{
+		question: "Правосудие должно всегда учитывать контекст и прошлое нарушителей, и соответствующим образом адаптировать свои наказания.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "c0",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "c1",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "В случае конфликта двух администраторов, важно будет попытаться помирить их, оставить в обществе обоих, ведь в противном случае, снятие всех флагов с одного из администраторов и его уход с проекта, может серьёзно повредить состоянию всей вики.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "c0",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "c1",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Мы должны уметь прощать даже перманентно забаненных участников, посредством разбана и реинтеграции их в общество спустя определённое количество времени после бана.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "c0",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "c1",
+				value: 10
+			}
+		]
+	},
+    /* Социальная ось ******************************************************* */
+	{
+		question: "Лучшая жизнь вики-общества придёт путём прогресса, развития, изменений в википроекте.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "d0",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "d1",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Важно сохранять традиции, принципы прошлого.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "d1",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "d0",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Мы ни при каких обстоятельствах не должны менять что-либо, что доказало свою пользу и работоспособность многими годами ранее.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "d1",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "d0",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Преследовать прогресс зачастую бывает нерационально и слишком затратно.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "d1",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "d0",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Подключение к работе википроекта новых функций — это в любом случае положительный процесс, который означает развитие, изучение и познание нового.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "d0",
+				value: 5
+			}
+		],
+		valuesNo: [
+			{
+				axis: "d1",
+				value: 5
+			}
+		]
+	},
+	{
+		question: "Важно постоянно следовать в ногу со временем, и в случае чего, незамедлительно делать обновления тех или иных элементов википроекта.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "d0",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "d1",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Необходимо вернуть возможность включения достижений на википроекте администраторами через Wiki Features, без нужды запрашивать подключение данного расширения у сотрудников ФЭНДОМА.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "d1",
+				value: 5
+			}
+		],
+		valuesNo: [
+			{
+				axis: "d0",
+				value: 5
+			}
+		]
+	},
+	{
+		question: "Удаление текущих расширений, на которых построены стены обсуждений, комментарии и профили участников на ФЭНДОМЕ, и замена их новыми расширениями — необходимая и неотъемлемая часть масштабного обновления ФЭНДОМА.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "d0",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "d1",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Я поддерживаю редизайн локального навигационного меню, произошедший в 2017 году.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "d0",
+				value: 5
+			}
+		],
+		valuesNo: [
+			{
+				axis: "d1",
+				value: 5
+			}
+		]
+	},
+	{
+		question: "Я поддерживаю проходившие ранее периодические обновления глобального навигационного меню (хедера, шапки страницы).",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "d0",
+				value: 5
+			}
+		],
+		valuesNo: [
+			{
+				axis: "d1",
+				value: 5
+			}
+		]
+	},
+	{
+		question: "Значительное изменение футера (подвала, нижнего колонтитула) в 2016 году имело положительный эффект и сделало футер заметно лучше.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "d0",
+				value: 5
+			}
+		],
+		valuesNo: [
+			{
+				axis: "d1",
+				value: 5
+			}
+		]
+	},
+	{
+		question: "Добавление новостной ленты в 2017 году — бесполезное обновление, которое носило в целом отрицательный характер, и сделало пользование сайтом только менее удобным.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "d1",
+				value: 5
+			}
+		],
+		valuesNo: [
+			{
+				axis: "d0",
+				value: 5
+			}
+		]
+	},
+	{
+		question: "Масштабное обновление модулей в рельсе (рейле, правой колонке) в 2017 году, значительно изменившее их дизайн, было безусловно прогрессивным и необходимым шагом.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "d0",
+				value: 5
+			}
+		],
+		valuesNo: [
+			{
+				axis: "d1",
+				value: 5
+			}
+		]
+	},
+	{
+		question: "Баннеры являются эффективным средством для продвижения википроектов.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "d0",
+				value: 5
+			},
+			{
+				axis: "e0",
+				value: 5
+			}
+		],
+		valuesNo: [
+			{
+				axis: "d1",
+				value: 5
+			},
+			{
+				axis: "e1",
+				value: 5
+			}
+		]
+	},
+	{
+		question: "Обсуждения — если не лучше форумов, то по крайне мере, это неплохая альтернатива им.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "d0",
+				value: 5
+			}
+		],
+		valuesNo: [
+			{
+				axis: "d1",
+				value: 5
+			}
+		]
+	},
+	{
+		question: "Планируемое удаление форумов и полная замена их на обсуждения — крайне предательский и подлый ход со стороны ФЭНДОМА.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "d1",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "d0",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Объединение ФЭНДОМА и Gamepedia в новую единую платформу (UCP) является совершенно лишним и ненужным действием.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "d1",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "d0",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Классический вики-чат должен быть упразднён, а ему на замену должна прийти интеграция ФЭНДОМА с Дискордом.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "d0",
+				value: 5
+			}
+		],
+		valuesNo: [
+			{
+				axis: "d1",
+				value: 5
+			}
+		]
+	},
+	{
+		question: "Участники должны иметь право регистрироваться и находиться впоследствии на ФЭНДОМЕ, даже если им меньше 13 лет.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "d0",
+				value: 5
+			}
+		],
+		valuesNo: [
+			{
+				axis: "d1",
+				value: 5
+			}
+		]
+	},
+    /* Дипломатическая ось ****************************************************** */
+	{
+		question: "Желательно поддерживать дружественные отношения между википроектами-единомышленниками, либо википроектами на схожую тематику.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "e0",
+				value: 5
+			}
+		],
+		valuesNo: [
+			{
+				axis: "e1",
+				value: 5
+			}
+		]
+	},
+	{
+		question: "Дипломатические отношения с другими вики выгодны и полезны.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "e0",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "e1",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Я не откажусь в случае викидружбы от взаимной рекламы моего википроекта и чужого.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "e0",
+				value: 5
+			}
+		],
+		valuesNo: [
+			{
+				axis: "e1",
+				value: 5
+			}
+		]
+	},
+	{
+		question: "Я активно занимаюсь правками на многих википроектах, не только на каком-то одном.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "e0",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "e1",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Для меня нет википроекта, который был бы для меня более важен и значим по сравнению с остальными вики.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "e0",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "e1",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Куда важнее уметь решать конфликты между википроектами при помощи дипломатии, а не при помощи викивойн.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "e0",
+				value: 5
+			}
+		],
+		valuesNo: [
+			{
+				axis: "e1",
+				value: 5
+			}
+		]
+	},
+	{
+		question: "Я интересуюсь внешней политикой ФЭНДОМА, изменениями на викихостинге.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "e0",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "e1",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Я интересуюсь разными википроектами с разными тематическими порталами (например, порталы видеоигр, сериалов, книг, анимаций и прочие), и активно провожу на них время.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "e0",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "e1",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Я предпочитаю находиться и проводить время в основном только на каком-то одном языковом портале ФЭНДОМА (например, на русском).",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "e1",
+				value: 5
+			}
+		],
+		valuesNo: [
+			{
+				axis: "e0",
+				value: 5
+			}
+		]
+	},
+	{
+		question: "Я активно принимаю участие в различных обсуждениях на центральной Вики Сообщества по тем или иным вопросам.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "e0",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "e1",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Администраторы разных вики должны сотрудничать всякий раз, когда это выгодно им обоим.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "e0",
+				value: 5
+			}
+		],
+		valuesNo: [
+			{
+				axis: "e1",
+				value: 5
+			}
+		]
+	},
+	{
+		question: "Я готов добровольно, в случае чего, помочь даже совершенно незнакомому мне википроекту.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "e0",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "e1",
+				value: 10
+			}
+		]
+	},
+    /* Ось интеграции ***************************************************** */
+	{
+		question: "Википроекты схожих тематик должны объединяться в викисоюзы или альянсы.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "f0",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "f1",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Активная взаимопомощь и ведение совместных действий — неотъемлемая черта википроектов, находящихся в викисоюзе.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "f0",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "f1",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Википроекты, находящиеся в викисоюзе, должны коллективно решать спорные ситуации относительно блокировок, введения правил, присвоения/снятия статусов и т. п.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "f0",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "f1",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "В случае объединения википроектов в викисоюз или альянс, я не буду против подчинения их единым правилам, организации совместной работы и прочего.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "e0",
+				value: 5
+			},
+			{
+				axis: "f0",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "e1",
+				value: 5
+			},
+			{
+				axis: "f1",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Важно ставить интересы целых групп вики выше интересов отдельных википроектов. Цели какого-либо одного википроекта не должны ставиться выше всех остальных.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "e0",
+				value: 5
+			},
+			{
+				axis: "f0",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "e1",
+				value: 5
+			},
+			{
+				axis: "f1",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Важно, чтобы у викисоюзов или альянсов была так называемая «головная вики».",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "f0",
+				value: 5
+			}
+		],
+		valuesNo: [
+			{
+				axis: "f1",
+				value: 5
+			}
+		]
+	},
+	{
+		question: "Нет ничего плохого в том, если участники крупного википроекта решат создать отдельные вики, и впоследствии сделать их доминионами основного крупного википроекта.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "f0",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "f1",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Необходимо предоставить независимость любым вики-доминионам.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "f1",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "f0",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Для более эффективной работы википроектов, необходимо организовать систему, при которой одни вики находятся под контролем других и подчиняются их требованиям.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "f0",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "f1",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Вполне допустимо создание викисоюзов или альянсов, где вся власть сосредоточена в руках 1-2 вики, а остальные лишь подчиняются им.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "f0",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "f1",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Сильная концентрация власти в руках малого числа отдельно взятых википроектов в конечном счёте приведёт к тирании и авторитаризму.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "a0",
+				value: 5
+			},
+			{
+				axis: "f1",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "a1",
+				value: 5
+			},
+			{
+				axis: "f0",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "У викисоюзов и альянсов обязательно должны быть свои логотипы, флаги, девизы и тому подобное.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "f0",
+				value: 5
+			}
+		],
+		valuesNo: [
+			{
+				axis: "f1",
+				value: 5
+			}
+		]
+	},
+	{
+		question: "Викисоюзы и альянсы могут представлять угрозу суверенитету отдельным и независимым википроектам.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "f1",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "f0",
+				value: 10
+			}
+		]
+	},
+	{
+		question: "Викисоюзы, как правило, не несут в себе никакой реальной пользы и существуют только на словах. Они не приводят ни к чему хорошему, и часто совершенно не нужны википроектам.",
+		answer: 0,
+		valuesYes: [
+			{
+				axis: "f1",
+				value: 10
+			}
+		],
+		valuesNo: [
+			{
+				axis: "f0",
+				value: 10
+			}
+		]
+	}
+];
 
-    }
+
+
+var qn = 0; // Question number
+var prev_answer = null;
+
+function shuffle(array)
+{
+	var i = 0 , j = 0 , temp = null;
+
+	for (i = array.length - 1; i > 0; i -= 1)
+	{
+		j = Math.floor(Math.random() * (i + 1));
+		temp = array[i];
+		array[i] = array[j];
+		array[j] = temp;
+	}
+}
+shuffle(questions)
+
+init_question();
+
+function init_question()
+{
+	document.getElementById("question-text").innerHTML = questions[qn].question;
+	document.getElementById("question-number").innerHTML = "{{ site.t[page.language].quiz_question_counter }}".replace("%num%", (qn + 1)).replace("%sum%", questions.length);
+	if (qn == 0)
+	{
+		document.getElementById("back_button").style.display = 'none';
+		document.getElementById("back_button_off").style.display = 'block';
+	}
+	else
+	{
+		document.getElementById("back_button").style.display = 'block';
+		document.getElementById("back_button_off").style.display = 'none';
+	}
+
+}
 
 function next_question(mult) {
 	questions[qn].answer = mult
@@ -92,19 +1796,101 @@ function prev_question()
 	init_question();
 
 }
-    function calc_score(score,max) {
-        return (100*(score)/(max)).toFixed(0)
-    }
-    function results() {
-        location.href = `results.html`
-            + `?g=${calc_score(govt,max_govt)}`
-            + `&c=${calc_score(cmnt,max_cmnt)}`
-            + `&j=${calc_score(jstc,max_jstc)}`
-            + `&s=${calc_score(scty,max_scty)}`
-            + `&d=${calc_score(dipl,max_dipl)}`
-            + `&i=${calc_score(intr,max_intr)}`
-    }
-        
+
+function calc_score(score,max_value)
+{
+	return (100*(score)/(max_value)).toFixed(0);
+}
+
+function results()
+{
+	var axes = {};
+	
+	for(var i=0; i<questions.length; i++)
+	{
+		q = questions[i];
+		
+		for(var j=0; j<q.valuesYes.length; j++)
+		{
+			a = q.valuesYes[j];
+			if(!(a.axis in axes))
+			{
+				axes[a.axis] = {
+					val: 0,
+					sum: 0
+				}
+			}
+			
+			if(q.answer > 0)
+			{
+				axes[a.axis].val += q.answer * a.value;
+			}
+			axes[a.axis].sum += Math.max(a.value, 0);
+		}
+		
+		for(var j=0; j<q.valuesNo.length; j++)
+		{
+			a = q.valuesNo[j];
+			if(!(a.axis in axes))
+			{
+				axes[a.axis] = {
+					val: 0,
+					sum: 0
+				}
+			}
+			
+			if(q.answer < 0)
+			{
+				axes[a.axis].val -= q.answer * a.value;
+			}
+			axes[a.axis].sum += Math.max(a.value, 0);
+		}
+	}
+	
+	url = ""
+	for(var aK in axes)
+	{
+		if(axes[aK].val > 0)
+		{
+			if(url != "")
+				url += "&"
+			url += aK+"="+calc_score(axes[aK].val, axes[aK].sum)
+		}
+	}
+	
+	url = "{{site.basepath}}/{{page.language}}/results?"+url
+	
+	location.href = url;
+}
+
+rand_c = Math.random();
+rand_b = Math.random();
+rand_s = Math.random();
+rand_j = Math.random();
+rand_p = Math.random();
+rand_m = Math.random();
+rand_e = Math.random();
+rand_t = Math.random();
+
+rand_per_axis = {
+	c0: rand_c,
+	c1: 1 - rand_c,
+	b0: rand_b,
+	b1: 1 - rand_b,
+	s0: rand_s,
+	s1: 1 - rand_s,
+	j0: rand_j,
+	j1: 1 - rand_j,
+	p0: rand_p,
+	p1: 1 - rand_p,
+	m0: rand_m,
+	m1: 1 - rand_m,
+	e0: rand_e,
+	e1: 1 - rand_e,
+	t0: rand_t,
+	t1: 1 - rand_t,
+}
+
 function simulate()
 {
 	while(qn < questions.length)
@@ -143,6 +1929,6 @@ function simulate()
 			next_question(-1);
 	}
 }
+
 </script>
-</body>
 </html>
