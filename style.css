@@ -88,7 +88,7 @@ img.center {
     margin: -2px auto;
     cursor: pointer;
 }
-.small_button, .small_button_off {
+.small_button {
     background-color: #333;
     font-family: 'Montserrat', sans-serif;
     border: none;
@@ -103,13 +103,6 @@ img.center {
     font-size: 18pt;
     margin: -2px auto;
     cursor: pointer;
-}
-.small_button_off {
-    background-color: #ddd;
-    color: #888;
-    border: 2px solid #888;
-    cursor: not-allowed;
-    margin: -4px auto;
 }
 div.axis {
     width: 100%;
