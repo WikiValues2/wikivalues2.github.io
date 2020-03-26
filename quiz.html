@@ -11,15 +11,27 @@
 <h1>WikiValues2</h1>
 <hr>
 <h2 style="text-align:center;" id="question-number">Загрузка...</h2>
-<p class="question" id="question-text"></p>
-<button class="button" onclick="next_question( 1.0)" style="background-color: #1b5e20;">Полностью согласен</button> <br>
-<button class="button" onclick="next_question( 0.5)" style="background-color: #4caf50;">Скорее согласен</button> <br>
-<button class="button" onclick="next_question( 0.0)" style="background-color: #bbbbbb;">Не знаю/Не уверен</button> <br>
-<button class="button" onclick="next_question(-0.5)" style="background-color: #f44336;">Скорее не согласен</button> <br>
-<button class="button" onclick="next_question(-1.0)" style="background-color: #b71c1c;">Полностью не согласен</button> <br>
-<button class="small_button" onclick="prev_question()" id="back_button">Предыдущий вопрос</button>
-<button class="small_button" onclick="simulate()">Случайный результат</button>   
-<button class="small_button" onclick="location.href='index.html';" style="background-color: #2196f3;">На главную</button><br>
+<h2 id="question-number">{{ site.t[page.language].quiz_loading }}</h2>
+<div class="questionBox">
+	<div>
+		<p id="question-text"></p>
+	</div>
+</div>
+<div class="navButtons">
+	<button class="button" onclick="next_question(1)" style="background-color: #1b5e20;">Полностью согласен</button>
+	<button class="button" onclick="next_question(2/3)" style="background-color: #4caf50;">Скорее согласен</button>
+	<button class="button" onclick="next_question(0)" style="background-color: #bbbbbb;">Не знаю/Не уверен</button>
+	<button class="button" onclick="next_question(-2/3)" style="background-color: #f44336;">Скорее не согласен</button>
+	<button class="button" onclick="next_question(-1)" style="background-color: #b71c1c;">Полностью не согласен</button>
+</div>
+
+<div class="navButtons">
+	<button class="small_button" onclick="prev_question()" id="back_button">Предыдущий вопрос</button>
+</div>
+<div class="navButtons">
+	<button class="small_button" onclick="simulate()">Случайный результат</button>
+	<button class="small_button" onclick="location.href='index.html';" style="background-color: #2196f3;">На главную</button>
+</div>
 
 <script>
 questions = [
@@ -1740,20 +1752,6 @@ questions = [
 var qn = 0; // Question number
 var prev_answer = null;
 
-function shuffle(array)
-{
-	var i = 0 , j = 0 , temp = null;
-
-	for (i = array.length - 1; i > 0; i -= 1)
-	{
-		j = Math.floor(Math.random() * (i + 1));
-		temp = array[i];
-		array[i] = array[j];
-		array[j] = temp;
-	}
-}
-shuffle(questions)
-
 init_question();
 
 function init_question()
@@ -1858,37 +1856,31 @@ function results()
 		}
 	}
 	
-	url = "{{site.basepath}}/{{page.language}}/results?"+url
+	url = "results.html"+url
 	
 	location.href = url;
 }
 
-rand_c = Math.random();
+rand_a = Math.random();
 rand_b = Math.random();
-rand_s = Math.random();
-rand_j = Math.random();
-rand_p = Math.random();
-rand_m = Math.random();
+rand_c = Math.random();
+rand_d = Math.random();
 rand_e = Math.random();
-rand_t = Math.random();
+rand_f = Math.random();
 
 rand_per_axis = {
-	c0: rand_c,
-	c1: 1 - rand_c,
+	a0: rand_a,
+	a1: 1 - rand_a,
 	b0: rand_b,
 	b1: 1 - rand_b,
-	s0: rand_s,
-	s1: 1 - rand_s,
-	j0: rand_j,
-	j1: 1 - rand_j,
-	p0: rand_p,
-	p1: 1 - rand_p,
-	m0: rand_m,
-	m1: 1 - rand_m,
+	c0: rand_c,
+	c1: 1 - rand_c,
+	d0: rand_d,
+	d1: 1 - rand_d,
 	e0: rand_e,
 	e1: 1 - rand_e,
-	t0: rand_t,
-	t1: 1 - rand_t,
+	f0: rand_f,
+	f1: 1 - rand_f,
 }
 
 function simulate()
